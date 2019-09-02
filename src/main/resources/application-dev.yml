@@ -1,0 +1,43 @@
+server:
+  port: 10086
+
+spring:
+  datasource:
+    username: root
+    password: root@appinside
+    url: jdbc:mysql://localhost:3306/api_server?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # spring-boot-security account, using when invoke
+#  security:
+#    user:
+#      name: test
+#      password: test
+
+  redis:
+    database: 0
+    host: localhost
+    port: 32773
+    timeout: 1000
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+      timeout: 60s
+      jedis:
+        pool:
+          max-idle: 500
+          min-idle: 50
+          max-wait:  -1s
+          max-active: -1
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.wkswind.server.api.entities
+
+logging:
+  level:
+    com:
+      wkswind:
+        server:
+          api:
+            mapper: debug

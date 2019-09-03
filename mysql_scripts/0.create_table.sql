@@ -249,7 +249,7 @@ CREATE TABLE `user` (
   `nickname` varchar(100) DEFAULT NULL,
   `mobile` varchar(30) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `avatar` varchar(100) DEFAULT NULL,
+  `avatar` varchar(100) DEFAULT NULL comment '第三方登录时获取头像后上传至自己的服务器，避免URL失效',
   `bio` varchar(50) DEFAULT NULL, 
   `create_time` datetime DEFAULT now(),
   `update_time` datetime DEFAULT now(),

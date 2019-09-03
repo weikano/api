@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.converter.HttpMessageConverter
+import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
@@ -28,6 +30,11 @@ fun main(args: Array<String>) {
 
 @Configuration
 class WebMvcConfiguration : WebMvcConfigurerAdapter() {
+	override fun configureMessageConverters(converters: MutableList<HttpMessageConverter<*>>) {
+		super.configureMessageConverters(converters)
+		//添加对application/x-protobuf支持，用于请求参数中包含proto字节数组的请求
+		converters.add(ProtobufHttpMessageConverter())
+	}
 	override fun addInterceptors(registry: InterceptorRegistry) {
 		super.addInterceptors(registry)
 		registry.addInterceptor(TestInterceptor).addPathPatterns("/*")

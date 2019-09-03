@@ -1,0 +1,46 @@
+syntax = "proto3";
+package com.wkswind.server.api.protobuf.http;
+option java_package = "com.wkswind.server.api.protobuf.http";
+option java_multiple_files = true;
+
+enum Platform {
+    IOS = 0;
+    ANDROID = 1;
+    H5 = 2;
+    WECHAT = 3;
+}
+
+message Device {
+    string os = 1;
+    string brand = 2;
+    string model = 3;
+    int32 versionCode = 4;
+    string channel = 5;
+}
+
+message Result {
+    int32 returnCode = 1;
+    string message = 2;
+}
+
+message Header {
+    Device device = 1;
+    string token = 2;
+    string refreshToken = 3;
+    string account = 4;
+    int64 userId = 5;
+    string appId = 6;
+    Platform platform = 7;
+    map<string, string> ext = 8;
+}
+
+message ClientRequest {
+    Header header = 1;
+    bytes body = 2;
+}
+
+message ServerResponse {
+    Header header = 1;
+    Result result = 2;
+    bytes body = 3;
+}
